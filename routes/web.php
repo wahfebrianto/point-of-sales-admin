@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index')->name('welcome');
+Route::get('/', 'HomeController@index');
 
 /**
  * Register the typical authentication routes for an application.
@@ -22,29 +22,6 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('login');
     Route::post('login', 'LoginController@login');
     Route::post('logout', 'LoginController@logout')->name('logout');
-
-    // Registration Routes...
-    if (config('adminlte.registration_open')) {
-        Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
-        Route::post('register', 'RegisterController@register');
-    }
-
-    // Password Reset Routes...
-    Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('password/reset', 'ResetPasswordController@reset');
-
-    if (config('adminlte.impersonate')) {
-        /**
-         * Impersonate User. Requires authentication.
-         */
-        Route::post('impersonate/{id}', 'ImpersonateController@impersonate')->name('impersonate');
-        /**
-         * Stop Impersonate. Requires authentication.
-         */
-        Route::get('impersonate/stop', 'ImpersonateController@stopImpersonate')->name('impersonate.stop');
-    }
 });
 
 // Redirect to /dashboard
@@ -96,3 +73,44 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 });
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+
+Route::resource('clinics', 'ClinicController');
+
+Route::resource('features', 'FeatureController');
+
+Route::resource('packets', 'PacketController');
+
+Route::resource('menus', 'MenuController');
+
+Route::resource('payments', 'PaymentController');
+
+Route::resource('roles', 'RoleController');
+
+Route::resource('permissions', 'PermissionController');
+
+Route::resource('promos', 'PromoController');
+
+Route::resource('topups', 'TopupController');
+
+Route::resource('supports', 'SupportController');
+
+Route::resource('conversations', 'ConversationController');
+
+Route::resource('messages', 'MessageController');
+
+Route::resource('bills', 'BillController');
+
+Route::resource('logs', 'LogController');
+
+Route::resource('users', 'UserController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

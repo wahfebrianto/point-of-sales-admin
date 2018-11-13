@@ -17,12 +17,12 @@ class HomeController extends Controller
     }
 
     /**
-     * Redirect to the application dashboard.
+     * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return redirect('/dashboard');
+        return view('home');
     }
 }

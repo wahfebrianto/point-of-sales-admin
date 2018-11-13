@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Controllers\Admin;
 
-use App\User;
+use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -23,7 +23,7 @@ class UsersControllerTest extends TestCase
 
         // Create User
         $tmpUser = factory(User::class)->make();
-        $response = $this->actingAs($user)->post(route('admin::users.store'), 
+        $response = $this->actingAs($user)->post(route('admin::users.store'),
             array_merge($tmpUser->toarray(), [
                 'password' => 'secret',
                 'password_confirmation' => 'secret',
@@ -54,7 +54,7 @@ class UsersControllerTest extends TestCase
 
         // Create User
         $tmpUser = factory(User::class)->make();
-        $response = $this->actingAs($user)->post(route('admin::users.store'), 
+        $response = $this->actingAs($user)->post(route('admin::users.store'),
             array_merge($tmpUser->toarray(), [
                 'password' => 'secret',
                 'password_confirmation' => 'secret',
